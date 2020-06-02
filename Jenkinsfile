@@ -28,7 +28,10 @@ pipeline {
                 sh './gradlew dockerPush'
             }
         }
-        stage('Deploy to AWS') {
+        stage('Deploy to AWS:prod') {
+        	when {
+               branch 'master'
+           	}
             environment {
                 DOCKER_HUB_LOGIN = credentials('docker-hub')
             }
